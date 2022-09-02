@@ -1,4 +1,14 @@
 /*--------------------- Constants ----------------------*/
+const winningCombos = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [3, 4, 6]
+]
 
 
 
@@ -89,41 +99,26 @@ function init() {
     // 4c) Render a message based on the current game state:
     //     - If winner has a value of `null` (meaning the game is still in
     //       progress), render whose turn it is.
-    // if(winner = null) {
-    //   renderTurn()
-    // } else if(winner = "T") {
+    if(winner = null) {
+      renderTurn(div)
+    } else if(winner = "T") {
       //     - If `winner` is equal to `'T'` (tie), render a tie message.
-    //   return ""
-    // } else {
+      renderTie(div)
+    } else {
       //     - Otherwise, render a congratulatory message to the player that has 
       //       won.
-    //   renderWin()
-    // }
-
+      renderWin(div)
+    }
 
   }
   
   
-  
-  
-  
-  
-  
       
-      
-      
-
-      
-
-
-
-  
-  
-    
 
 // Step 5 - Define the required constants
 
-  // 5a) In a constant called `winningCombos` define the eight possible winning 
+  // 5a) In a constant called `winningCombos` define the eight possible winning
+  
   //     combinations as an array of arrays.
 
 // Step 6 - Handle a player clicking a square with a `handleClick` function
