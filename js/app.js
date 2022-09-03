@@ -23,8 +23,9 @@ const messageEl = document.querySelector("#message")
 
 
 
-/*------------------ Event Listeners -------------------*/
-
+/*------------------ Event Listeners 
+-------------------*/
+document.querySelector("section").addEventListener("click", handleClick)
 
 
 /*-------------------- Functions -----------------------*/
@@ -115,26 +116,36 @@ function init() {
   
       
 
-// Step 5 - Define the required constants
+//// Step 5 - Define the required constants
 
   // 5a) In a constant called `winningCombos` define the eight possible winning
   
   //     combinations as an array of arrays.
 
 // Step 6 - Handle a player clicking a square with a `handleClick` function
+// 6a) Create a function called `handleClick`. It will have an `evt`
+//     parameter.
+  function handleClick(evt) {
+    console.log(evt, "was click");
+    //// 6b) Attach an event listener to the game board (you can do this to each
+    //     one of the existing `squareEls` OR add a new cached element reference
+    //     that will allow you to take advantage of event bubbling). On the
+    //     `'click'` event, it should call the `handleClick` function
+    //     you created in 6a.
+    // 6c) Obtain the index of the square that was clicked by "extracting" the 
+    //     index from an `id` assigned to the element in the HTML. Assign this  
+    //     to a constant called `sqIdx`.
+  
+    // squareEls.findIndex(function(square) {
+    //   evt.target
+    //   render()
+    // })
+    
+    
+  }
 
-  // 6a) Create a function called `handleClick`. It will have an `evt`
-  //     parameter.
 
-  // 6b) Attach an event listener to the game board (you can do this to each
-  //     one of the existing `squareEls` OR add a new cached element reference
-  //     that will allow you to take advantage of event bubbling). On the
-  //     `'click'` event, it should call the `handleClick` function
-  //     you created in 6a.
 
-  // 6c) Obtain the index of the square that was clicked by "extracting" the 
-  //     index from an `id` assigned to the element in the HTML. Assign this  
-  //     to a constant called `sqIdx`.
 
   // 6d) If the `board` has a value at the `sqIdx`, immediately `return`  
   //     because that square is already taken. Also, if `winner` is not `null`
