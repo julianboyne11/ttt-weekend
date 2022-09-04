@@ -66,6 +66,7 @@ function init() {
   turn = -1
   winner = null
   render()
+  resetBtn.setAttribute("hidden", true)
 
 }
 
@@ -85,6 +86,7 @@ function init() {
 // Step 4 - The state of the game should be rendered to the use
 // 4a) Create a function called `render`.
 function render() {
+  
     // 4b) Loop over `board` and for each element:
     //     - Use the current index of the iteration to access the corresponding 
     //       square in the `squareEls` array.
@@ -112,13 +114,12 @@ function render() {
     //     - If winner has a value of `null` (meaning the game is still in
     //       progress), render whose turn it is.
     if(winner === null) {
-      messageEl.textContent = `It's ${turn === 1 ? "Player 1's turn!" : "Player 2's turn!"}`
+      messageEl.textContent = `It's ${turn === 1 ? "Player 's turn!" : "Player 1's turn!"}`
       
     } else {
-      messageEl.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats! " + turn + " won!"}`
-      
+      messageEl.textContent = `${winner === "T" ? "It's a tie!" : "Congrats! " + turn + " won!"}`
     }
-    
+
   }
   
 
@@ -137,6 +138,7 @@ function render() {
 // 6a) Create a function called `handleClick`. It will have an `evt`
 //     parameter.
   function handleClick(evt) {
+    
     
     //// 6b) Attach an event listener to the game board (you can do this to each
     //     one of the existing `squareEls` OR add a new cached element reference
@@ -166,12 +168,12 @@ function render() {
       // 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
       //     `-1`, and vice-versa).
       turn = turn * -1
-      console.log(turn)
+      
       // 6g) Set the `winner` variable if there's a winner by calling a new 
       //     function: `getWinner`.
-      if(winner) {
-        return getWinner()
-      }
+    
+      getWinner()
+    
       // 6h) All the state has been updated so we need to render our updated state 
       //     to the user by calling the `render` function we wrote earlier.
       render()
@@ -190,16 +192,25 @@ function render() {
 // Step 7 - Build the `getWinner` function
 
   // 7a) Create a function called `getWinner`
-function getWinner(winner) {
+function getWinner() {
   winningCombos.forEach(combo => {
   	if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3){
-			winner = turn
+			return winner = turn
 		}else if(!board.includes(null)){
-			winner = 'T'
-		}
+			winner = "T"
+		} 
+    
+    // 7b1)Loop through each of the winning combination arrays defined in the 
+    //     `winningCombos` array. Total up the three board positions using the 
+    //     three indexes in the current combo. Convert the total to an absolute 
+    //     value (convert any negative total to positive). If the total equals 3, 
+    //     we have a winner! Set the `winner` variable to the board's value at
+    //     the index specified by the first index of that winning combination's
+    //     array by returning that value.
 	})
 
   }
+  console.log(getWinner());
 
   /* 
    * There are two methods you can use to find out if there is a winner.
@@ -213,13 +224,6 @@ function getWinner(winner) {
    * ***Ensure you choose only one path.***
    */
 
-  // 7b1)Loop through each of the winning combination arrays defined in the 
-  //     `winningCombos` array. Total up the three board positions using the 
-  //     three indexes in the current combo. Convert the total to an absolute 
-  //     value (convert any negative total to positive). If the total equals 3, 
-  //     we have a winner! Set the `winner` variable to the board's value at
-  //     the index specified by the first index of that winning combination's
-  //     array by returning that value.
 
   // 7b2)For each one of the winning combinations you wrote in step 5, find the
   //     total of each winning combination. Convert the total to an absolute 
