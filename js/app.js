@@ -20,12 +20,16 @@ let board, turn, winner
 /*------------ Cached Element References ---------------*/
 const squareEls = document.querySelectorAll(".square")
 const messageEl = document.querySelector("#message")
+const form = document.querySelector("form")
+const resetBtn = document.querySelector("#reset-button")
+
 
 
 
 /*------------------ Event Listeners 
 -------------------*/
 document.querySelector("section").addEventListener("click", handleClick)
+form.addEventListener("reset", init)
 
 
 
@@ -62,6 +66,7 @@ function init() {
   turn = -1
   winner = null
   render()
+
 }
 
   // 3a) Create a function called `init`.
@@ -80,6 +85,7 @@ function init() {
 // Step 4 - The state of the game should be rendered to the use
 // 4a) Create a function called `render`.
   function render() {
+    getWinner()
     // 4b) Loop over `board` and for each element:
     //     - Use the current index of the iteration to access the corresponding 
     //       square in the `squareEls` array.
@@ -107,14 +113,16 @@ function init() {
     //     - If winner has a value of `null` (meaning the game is still in
     //       progress), render whose turn it is.
     if(winner === null) {
-      turn * -1
+      
     } else if(winner === "T") {
       //     - If `winner` is equal to `'T'` (tie), render a tie message.
-      messageEl.textContent = "You have Tied!"
+      messageEl.textContent = `It's ${turn === 1 ? "Player 1's turn!" : "Player 2's turn!"}`
     } else {
-      messageEl.textContent = `Congratulations, ${turn} has won!!` 
-    }
+      messageEl.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats! " + turn + " won!"}`
+  
   }
+  
+}
   
 
 
@@ -193,7 +201,7 @@ function getWinner(winner) {
 			winner = 'T'
 		}
 	})
-  render()
+
   }
 
   /* 
