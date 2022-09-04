@@ -7,7 +7,7 @@ const winningCombos = [
   [1, 4, 7],
   [2, 5, 8],
   [0, 4, 8],
-  [3, 4, 6]
+  [2, 4, 6]
 ]
 
 
@@ -28,8 +28,8 @@ const resetBtn = document.querySelector("#reset-button")
 
 /*------------------ Event Listeners 
 -------------------*/
-document.querySelector("section").addEventListener("click", handleClick)
-form.addEventListener("reset", init)
+squareEls.forEach(function(square){ square.addEventListener("click", handleClick)})
+form.addEventListener("click", resetGame)
 
 
 
@@ -84,8 +84,7 @@ function init() {
 
 // Step 4 - The state of the game should be rendered to the use
 // 4a) Create a function called `render`.
-  function render() {
-    getWinner()
+function render() {
     // 4b) Loop over `board` and for each element:
     //     - Use the current index of the iteration to access the corresponding 
     //       square in the `squareEls` array.
@@ -106,23 +105,21 @@ function init() {
       } else { 
         squareEls[idx].textContent = ""
       }
-      
+      resetBtn.removeAttribute("hidden")
     })
     
     // 4c) Render a message based on the current game state:
     //     - If winner has a value of `null` (meaning the game is still in
     //       progress), render whose turn it is.
     if(winner === null) {
-      
-    } else if(winner === "T") {
-      //     - If `winner` is equal to `'T'` (tie), render a tie message.
       messageEl.textContent = `It's ${turn === 1 ? "Player 1's turn!" : "Player 2's turn!"}`
+      
     } else {
       messageEl.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats! " + turn + " won!"}`
-  
+      
+    }
+    
   }
-  
-}
   
 
 
@@ -172,7 +169,7 @@ function init() {
       console.log(turn)
       // 6g) Set the `winner` variable if there's a winner by calling a new 
       //     function: `getWinner`.
-      if(winner === true) {
+      if(winner) {
         return getWinner()
       }
       // 6h) All the state has been updated so we need to render our updated state 
@@ -237,7 +234,11 @@ function getWinner(winner) {
 
   // 7d) If there is no winner and there isn’t a tie, return `null`.
 
-// Step 8 - Create Reset functionality
+//// Step 8 - Create Reset functionality
+function resetGame() {
+  init()
+  resetBtn.hidden = true
+}
 
   // 8a) Add a reset button to the HTML document.
 
