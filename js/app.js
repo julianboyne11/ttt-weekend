@@ -28,6 +28,7 @@ const messageEl = document.querySelector("#message")
 document.querySelector("section").addEventListener("click", handleClick)
 
 
+
 /*-------------------- Functions -----------------------*/
 
 
@@ -84,6 +85,8 @@ function init() {
     //       square in the `squareEls` array.
     board.forEach((value, idx) => {
       
+      squareEls[idx].textContent = value 
+      
       //     - Style that square however you wish, dependent on the value  
       //       contained in the current cell being iterated over (`-1`, `1`, or
       //       `null`). 
@@ -94,27 +97,30 @@ function init() {
       } else if (board[idx] === -1) {
         
         squareEls[idx].textContent = "O"
+      } else { 
+        squareEls[idx].textContent = ""
       }
       
     })
+    
     // 4c) Render a message based on the current game state:
     //     - If winner has a value of `null` (meaning the game is still in
     //       progress), render whose turn it is.
-    if(winner = null) {
-      renderTurn(div)
-    } else if(winner = "T") {
+    if(winner === null) {
+      turn * -1
+    } else if(winner === "T") {
       //     - If `winner` is equal to `'T'` (tie), render a tie message.
-      renderTie(div)
+      messageEl.textContent = "You have Tied!"
     } else {
-      //     - Otherwise, render a congratulatory message to the player that has 
-      //       won.
-      renderWin(div)
+      messageEl.textContent = `Congratulations, ${turn} has won!!` 
     }
-
   }
   
-  
-      
+
+
+
+
+
 
 //// Step 5 - Define the required constants
 
@@ -126,7 +132,7 @@ function init() {
 // 6a) Create a function called `handleClick`. It will have an `evt`
 //     parameter.
   function handleClick(evt) {
-    console.log(evt, "was click");
+    
     //// 6b) Attach an event listener to the game board (you can do this to each
     //     one of the existing `squareEls` OR add a new cached element reference
     //     that will allow you to take advantage of event bubbling). On the
@@ -136,36 +142,59 @@ function init() {
     //     index from an `id` assigned to the element in the HTML. Assign this  
     //     to a constant called `sqIdx`.
   
-    // squareEls.findIndex(function(square) {
-    //   evt.target
-    //   render()
-    // })
+
+      
+      const sqIdx = parseInt(evt.target.id[2])
+        // 6d) If the `board` has a value at the `sqIdx`, immediately `return`  
+        //     because that square is already taken. Also, if `winner` is not `null`
+        if (winner !== null){
+          //     immediately `return` because the game is over.
+          return
+        } else if (board[sqIdx] !== null) {
+          return
+        } else {
+          // 6e) Update the `board` array at the `sqIdx` with the current value of
+          //     `turn`.
+          board.splice(sqIdx, 1, turn)
+        }
+      
+      // 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
+      //     `-1`, and vice-versa).
+      turn = turn * -1
+      console.log(turn)
+      // 6g) Set the `winner` variable if there's a winner by calling a new 
+      //     function: `getWinner`.
+      if(winner === true) {
+        return getWinner()
+      }
+      // 6h) All the state has been updated so we need to render our updated state 
+      //     to the user by calling the `render` function we wrote earlier.
+      render()
+      
+    }
     
-    
-  }
+  
 
 
 
 
-  // 6d) If the `board` has a value at the `sqIdx`, immediately `return`  
-  //     because that square is already taken. Also, if `winner` is not `null`
-  //     immediately `return` because the game is over.
 
-  // 6e) Update the `board` array at the `sqIdx` with the current value of
-  //     `turn`.
 
-  // 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
-  //     `-1`, and vice-versa).
 
-  // 6g) Set the `winner` variable if there's a winner by calling a new 
-  //     function: `getWinner`.
-
-  // 6h) All the state has been updated so we need to render our updated state 
-  //     to the user by calling the `render` function we wrote earlier.
 
 // Step 7 - Build the `getWinner` function
 
   // 7a) Create a function called `getWinner`
+function getWinner(winner) {
+  winningCombos.forEach(combo => {
+  	if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3){
+			winner = turn
+		}else if(!board.includes(null)){
+			winner = 'T'
+		}
+	})
+  render()
+  }
 
   /* 
    * There are two methods you can use to find out if there is a winner.
