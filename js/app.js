@@ -117,7 +117,7 @@ function render() {
       messageEl.textContent = `It's ${turn === 1 ? "Player 2's turn!" : "Player 1's turn!"}`
       
     } else {
-      messageEl.textContent = `${winner === "T" ? "It's a tie!" : "Congrats! " + turn + " won!"}`
+      messageEl.textContent = `${winner === null ? "It's a tie!" : "Congrats! " + turn + " won!"}`
     }
 
   }
@@ -196,14 +196,14 @@ function render() {
   // 7a) Create a function called `getWinner`
 function getWinner() {
   winningCombos.forEach(combo => {
-  	if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3){
-			return winner = turn
+    if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3){
+      
+      return winner = turn
 		}else if(board.includes(3)){
-			winner = turn
+      winner = turn
 		} else if(!board.includes(null)) {
       winner = "T"
     }
-    
     // 7b1)Loop through each of the winning combination arrays defined in the 
     //     `winningCombos` array. Total up the three board positions using the 
     //     three indexes in the current combo. Convert the total to an absolute 
@@ -212,7 +212,6 @@ function getWinner() {
     //     the index specified by the first index of that winning combination's
     //     array by returning that value.
 	})
-
   }
 
 
