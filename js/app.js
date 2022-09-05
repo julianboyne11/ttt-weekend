@@ -197,7 +197,7 @@ function render() {
 function getWinner() {
   winningCombos.forEach(combo => {
     if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3){
-      
+      confetti.start(2000)
       return winner = turn
 		}else if(board.includes(3)){
       winner = turn
