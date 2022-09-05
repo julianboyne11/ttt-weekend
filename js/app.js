@@ -114,13 +114,15 @@ function render() {
     //     - If winner has a value of `null` (meaning the game is still in
     //       progress), render whose turn it is.
     if(winner === null) {
-      messageEl.textContent = `It's ${turn === 1 ? "Player 's turn!" : "Player 1's turn!"}`
+      messageEl.textContent = `It's ${turn === 1 ? "Player 2's turn!" : "Player 1's turn!"}`
       
     } else {
       messageEl.textContent = `${winner === "T" ? "It's a tie!" : "Congrats! " + turn + " won!"}`
     }
 
   }
+
+  
   
 
 
@@ -196,9 +198,11 @@ function getWinner() {
   winningCombos.forEach(combo => {
   	if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3){
 			return winner = turn
-		}else if(!board.includes(null)){
-			winner = "T"
-		} 
+		}else if(board.includes(3)){
+			winner = turn
+		} else if(!board.includes(null)) {
+      winner = "T"
+    }
     
     // 7b1)Loop through each of the winning combination arrays defined in the 
     //     `winningCombos` array. Total up the three board positions using the 
@@ -210,7 +214,7 @@ function getWinner() {
 	})
 
   }
-  console.log(getWinner());
+
 
   /* 
    * There are two methods you can use to find out if there is a winner.

@@ -7,6 +7,11 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: bounce; 
+  animation-duration: 2s; 
 }
 
 section.board {
@@ -33,3 +38,24 @@ body {
 #reset-button {
   margin-top: 40px;
 }
+
+#message {
+  display: inline-block;
+  margin: 0 0.5rem;
+  animation: bounce; 
+  animation-duration: 2s; 
+  margin-bottom: 20px;
+
+}
+
+h1 {
+  color: black;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 60px;
+  display: inline-block;
+  margin: 0 0.5rem;
+  animation: bounce; 
+  animation-duration: 2s; 
+  margin-bottom: 25px;
+}
+
