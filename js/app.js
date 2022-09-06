@@ -42,7 +42,7 @@ init()
 
 function init() {
   board = [null, null, null, null, null, null, null, null, null]
-  turn = -1
+  turn = 1
   winner = null
   render()
   resetBtn.setAttribute("hidden", true)
